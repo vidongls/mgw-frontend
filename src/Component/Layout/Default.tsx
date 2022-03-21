@@ -6,6 +6,7 @@ import DefaultPropsInterface from "../../Interfaces/DefaultPropsInterface"
 import SecurityService from "../../Util/SecurityService"
 import { Header } from "./Header"
 import SideBar from "./Sidebar"
+import logo from "../../resources/images/logo.svg"
 
 const { Content, Footer } = Layout
 
@@ -61,7 +62,14 @@ export const DefaultLayout: React.FC<DefaultPropsInterface> = (props) => {
 							</Spin>
 						</div>
 					</Content>
-					<Footer className="footer">Powered By MGW.</Footer>
+					<Footer className="footer">
+						<div className="flex justify-center">
+							<div className="logo-mgw">
+								<img src={logo} alt="logo" />
+							</div>{" "}
+							Powered By MGW.
+						</div>
+					</Footer>
 				</Layout>
 			</Layout>
 		</DocumentTitle>

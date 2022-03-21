@@ -12,7 +12,6 @@ import React, {useEffect, useState} from "react"
 import {Link, useLocation} from "react-router-dom"
 import TriggerInImg from "../../resources/images/icon-trigger.png"
 import SecurityService from "../../Util/SecurityService"
-
 const { Sider } = Layout
 interface IMenuItem {
 	key: string
@@ -172,6 +171,7 @@ export const SideBar = (props: Props) => {
 					) : null
 				}
 			>
+               
 				<div className={`sidebar__trigger-top ${xs ? "closable" : ""}`}>
 					{collapsed ? (
 						<DoubleRightOutlined onClick={() => props.onCollapsed(false)} />
