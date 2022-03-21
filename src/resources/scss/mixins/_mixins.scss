@@ -1,0 +1,97 @@
+@mixin app-btn-link-hover {
+	background-color: $color-app-primary;
+	color: white;
+	box-shadow: 0px 0px 0px 3px $color-app-tertiary;
+}
+
+@mixin app-btn-default {
+	border: 1px solid $color-app-border;
+	border-radius: 4px;
+	color: $color-app-primary;
+}
+
+@mixin app-modal-font($fs, $lh, $fw, $cl) {
+	font-size: #{$fs}px;
+	line-height: #{$lh}px;
+	font-weight: #{$fw};
+	color: $cl;
+}
+
+@mixin app-base-font-placeholder {
+	@include app-modal-font(14, 22, 400, $color-app-placeholder);
+}
+
+@mixin app-base-font-default {
+	@include app-modal-font(14, 22, 400, $color-app-base);
+}
+
+@mixin app-modal-form-input {
+	background: #ffffff;
+	border: 1px solid $color-app-modal-border;
+	border-radius: 2px;
+	padding: 5px 12px;
+}
+
+@mixin app-modal-button {
+	@include app-modal-font(14, 22, 400, $color-app-base);
+	color: $color-app-base;
+	border: 1px solid $color-app-modal-border;
+	border-radius: 4px;
+	padding: 5px 16px;
+}
+
+@mixin app-modal-btn($color, $bg, $rad, $border) {
+	color: $color !important;
+	background-color: $bg !important;
+	border-radius: #{$rad}px;
+	border: 1px solid $border;
+}
+
+//Break point
+@mixin xxs-min {
+	@media (max-width: 320px) {
+		@content;
+	}
+}
+
+@mixin xxs {
+	@media (max-width: 375px) {
+		@content;
+	}
+}
+
+@mixin xs {
+	@media (max-width: 576px) {
+		@content;
+	}
+}
+
+@mixin sm {
+	@media (min-width: 576px) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
+@mixin xxl {
+	@media (min-width: 1440px) {
+		@content;
+	}
+}

@@ -1,0 +1,132 @@
+/* Color*/
+$color-base: #666;
+$color-secondary: #222;
+$color-text: #666;
+$color-text-secondary: #888;
+$color-text-heading: #222;
+$color-link: #3498db;
+$color-bg-footer: #282828;
+
+/* Variable Template, App Layout */
+
+$color-app-base: #1a1a1a;
+$color-app-primary: #2a9f9c;
+$color-app-primary-m: #22817e;
+$color-app-tertiary: #e2fbfa;
+$color-app-secondary: #f4f6f8;
+$color-app-border: #34c4c0;
+$color-app-disabled: #bdbdbd;
+$color-app-base-input: #d9d9d9;
+$color-app-link: #008df9;
+$color-app-modal-border: #c7c7c7;
+$color-app-placeholder: #bdbdbd;
+$color-app-heading-sub: #707070;
+$color-app-white: #fff;
+//**************************
+
+$darkSkyBlue: #3498db;
+$line: #cbcacf;
+$title: #333;
+$jadeGreen: #27ae60;
+$brownishGrey: #666;
+$bloodOrange: #ff4400;
+$tomato: #e74c3c;
+$btn: #adadad;
+
+/*//Fonts-size*/
+$font-size-xs: 12px;
+$font-size-s: 14px;
+$font-size-m: 32px;
+
+/*//Url base*/
+$url-img: '../../images';
+
+/*//Breakpoint*/
+$bp-xs: 320px;
+$bp-mobile: 320px;
+
+$bp-s: 480px;
+$bp-sm: 768px;
+$bp-tablet: 768px;
+
+$bp-m: 992px;
+$bp-l: 1200px;
+$bp-xl: 1440px;
+
+/*// Contain floats / clearfix*/
+
+%clearfix {
+    *zoom: 1;
+    &:before,
+    &:after {
+        content: ' ';
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/* New style 2018-03-08 */
+
+/* Variable Template, App Layout */
+$color-app-base: #1a1a1a;
+$color-app-primary: #2a9f9c;
+$color-app-primary-m: #22817e;
+$color-app-tertiary: #e2fbfa;
+$color-app-secondary: #f4f6f8;
+$color-app-border: #34c4c0;
+$color-app-disabled: #bdbdbd;
+$color-app-base-input: #d9d9d9;
+$color-app-link: #008df9;
+$color-app-modal-border: #c7c7c7;
+$color-app-placeholder: #bdbdbd;
+$color-app-heading-sub: #707070;
+
+$base-color: #00abf3;
+$base-text-color: #fff;
+
+$font-weights: (
+    'thin': 100,
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+);
+
+@function font-weights($style) {
+    @return map-get($font-weights, $style);
+}
+
+$app-font-sizes: (
+    'sm': 12px,
+    'reg': 14px,
+    'md': 16px,
+    'lg': 24px,
+    'heading': 20px,
+);
+
+@function app-font-sizes($style) {
+    @return map-get($app-font-sizes, $style);
+}
+
+$app-button-colors: (
+    'selected': $color-app-tertiary,
+    'clicked': $color-app-secondary,
+    'hover': $color-app-primary-m,
+);
+
+@function app-button-colors($style) {
+    @return map-get($app-button-colors, $style);
+}
+
+$app-text-colors: (
+    'base': $color-app-base,
+    'primary': $color-app-primary,
+    'secondary': $color-app-placeholder,
+    'desc': $color-app-heading-sub,
+    'badge': $color-app-tertiary,
+);
+
+@function app-text-colors($style) {
+    @return map-get($app-text-colors, $style);
+}

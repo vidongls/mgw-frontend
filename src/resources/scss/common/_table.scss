@@ -1,0 +1,22 @@
+.a-table {
+	&--responsive {
+		width: 100%;
+		overflow: auto;
+	}
+	&--font-small {
+		table tbody {
+			font-size: 12px;
+		}
+	}
+	table {
+		font-size: 14px;
+
+		@media only screen and (min-width: 1200px) {
+			font-size: 12px;
+		}
+
+		@media only screen and (min-width: 1400px) {
+			font-size: 14px;
+		}
+	}
+}

@@ -1,0 +1,14 @@
+.staff-detail-img-cover {
+  width: 150px;
+  height: 150px;
+  @media only screen and (min-width: 1200px) {
+    width: 180px;
+    height: 180px;
+  }
+}
+.staff-detail-info-label {
+  @media only screen and (min-width: 1200px) {
+    width: 180px;
+    display: inline-block;
+  }
+}

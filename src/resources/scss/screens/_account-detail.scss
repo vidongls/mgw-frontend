@@ -1,0 +1,21 @@
+.account-owner-item {
+  margin-bottom: 15px;
+  overflow: hidden;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .account-owner-avatar {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: center center;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .account-owner-name {
+    display: inline-block;
+  }
+  .account-owner-icon-remove {
+    margin-top: 7px;
+  }
+}
