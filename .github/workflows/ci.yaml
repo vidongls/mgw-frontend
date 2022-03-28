@@ -1,15 +1,18 @@
-name: CI
-on: [push]
+name: deploy website
+on: [pull_request]
 jobs:
-  standard-checks:
-    name: Build CI
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - name: CI
-        run: npm ci
-      - name: Bundle and Output
-        run: npm run build
+      - uses: actions/checkout@v2
+      #  your build commands
+      # - run: |
+      #    ng build --prod
+      - uses: amondnet/vercel-action@v20 #deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
+          vercel-args: '--prod' #Optional
+          vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
+          working-directory: ./sub-directory
