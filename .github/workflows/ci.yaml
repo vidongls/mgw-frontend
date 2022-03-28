@@ -12,8 +12,6 @@ jobs:
 
       - name: Install packages
         run: npm ci
-      - name: Run ESlint
-        run: npm run ci:lint
       - name: Run Tests
         run: npm run ci:test
       - name: Bundle and Output
