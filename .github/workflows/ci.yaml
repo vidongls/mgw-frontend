@@ -21,7 +21,6 @@ jobs:
  
       - name: Build
         run: |
-          yarn install --frozen-lockfile
           npm run bundle
  
       - name: Run Tests Locally
