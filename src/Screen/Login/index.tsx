@@ -4,7 +4,7 @@ import { Button, Form, Input, Spin, Typography } from "antd"
 import { useSearchParams } from "react-router-dom"
 import appConfig from "../../Config/App"
 import localStore from "../../Util/localStore"
-import loginImg from "../../resources/images/login-tree.jpg"
+import loginImg from "../../resources/images/auth-bg.jpg"
 import logo from "../../resources/images/logo.svg"
 
 const { Title } = Typography
@@ -29,55 +29,36 @@ export const Login = () => {
 		console.log("Failed:", errorInfo)
 	}
 	return (
-		<div className="login-layout">
-			<div className="header-login">
-				<img src={logo} alt="" width={40} />
-			</div>
-			<div className="login">
-				<div className="login-wrapper">
-					<div className="login-left">
-						<img src={loginImg} alt="loginImg" />
-					</div>
-					<div className="login-right">
-						<div className="login-right__header flex items-center flex-col justify-center">
-							<img src={logo} alt="" width={70} />
-							<Title level={4}>Chào mừng bạn tới với MGW</Title>
-							<p>
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi unde nisi asperiores expedita consectetur
-								fugiat
-							</p>
+		<div className="login">
+			<div className="login-wrapper">
+				<div className="login-bg">
+					<img src={loginImg} alt="" />
+				</div>
+				<div className="login-left">
+					<h1>
+						Welcome to <span>MGW</span>
+					</h1>
+					<p>
+						Duis aute irure dolor in reprehenderit in voluptate, qui in ea voluptate velit esse, quam
+						<br />
+						nihil molestiae consequatur, vel illum, obcaecati cupiditate nons.
+					</p>
+				</div>
+
+				<div className="login-right">
+					<div className="login-panel">
+						<div className="login-panel__wrapper">
+							<div className="login-panel__content">
+								<div className="login-panel__header">
+									<div className="login-panel__logo">
+										<img src={logo} alt="" />
+										<div>MGW</div>
+									</div>
+									<div className="login-panel__sub">Please login to your account.</div>
+								</div>
+							</div>
+							<div className="login-panel__footer">Don't have an account? Sign Up</div>
 						</div>
-						<Form
-							name="basic"
-							initialValues={{ remember: true }}
-							onFinish={onFinish}
-							onFinishFailed={onFinishFailed}
-							autoComplete="off"
-							className="login-form"
-							layout="vertical"
-						>
-							<Form.Item
-								label="Email"
-								name="username"
-								className="login-form__email"
-								rules={[{ required: true, message: "Please input your username!" }]}
-							>
-								<Input />
-							</Form.Item>
-							<Form.Item
-								label="Mật khẩu"
-								name="password"
-								className="login-form__password"
-								rules={[{ required: true, message: "Please input your password!" }]}
-							>
-								<Input.Password />
-							</Form.Item>
-							<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-								<Button type="primary" htmlType="submit">
-									Đăng nhập
-								</Button>
-							</Form.Item>
-						</Form>
 					</div>
 				</div>
 			</div>
