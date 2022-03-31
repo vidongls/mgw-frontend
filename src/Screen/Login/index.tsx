@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react"
-import { Button, Form, Input, Spin, Typography } from "antd"
-
+import { Button, Form, Input, Spin, Typography, Divider } from "antd"
+import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons"
 import { useSearchParams } from "react-router-dom"
 import appConfig from "../../Config/App"
 import localStore from "../../Util/localStore"
 import loginImg from "../../resources/images/auth-bg.jpg"
+import imgBackground from "../../resources/images/auth-bg.jpg"
 import logo from "../../resources/images/logo.svg"
 
 const { Title } = Typography
@@ -57,7 +58,25 @@ export const Login = () => {
 									<div className="login-panel__sub">Please login to your account.</div>
 								</div>
 							</div>
-							<div className="login-panel__footer">Don't have an account? Sign Up</div>
+							<div className="login-content">
+								<Form onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+									<Form.Item name="Mail" rules={[{ required: true, message: "Please input your mail!" }]}>
+										<Input size="large" placeholder="Email" prefix={<MailOutlined />} className="login-content__input" />
+									</Form.Item>
+
+									<Form.Item name="password" rules={[{ required: true, message: "Please input your password!" }]}>
+										<Input.Password size="large" prefix={<LockOutlined />} />
+									</Form.Item>
+
+									<Form.Item>
+										<Button type="primary" htmlType="submit" className="btn-login">
+											Login
+										</Button>
+									</Form.Item>
+								</Form>
+							</div>
+
+							<Divider>MGW</Divider>
 						</div>
 					</div>
 				</div>
