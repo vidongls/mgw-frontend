@@ -388,7 +388,7 @@
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		background-position: center;
-        background-size: cover;
+		background-size: cover;
 		display: none;
 
 		@include md {
@@ -397,7 +397,7 @@
 		h1 {
 			margin-bottom: 2rem;
 			font-weight: 700;
-            color: #fff;
+			color: #fff;
 			font-size: 3rem;
 			line-height: 1.2;
 			letter-spacing: 0.1em;
@@ -408,7 +408,7 @@
 		p {
 			color: #fff;
 			margin-bottom: 0;
-            font-weight: 500;
+			font-weight: 500;
 			line-height: 2.13333em;
 		}
 	}
@@ -471,7 +471,35 @@
 			margin-bottom: 8px;
 		}
 	}
+	// .btn-login {
+	// 	display: flex;
+	// 	width: 100%;
+	// 	display: inline-flex;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// 	height: 2.6667rem;
+	// 	padding: 0 1.4667rem;
+	// 	font-weight: 500;
+	// 	background-color: #0081ff;
+	// 	border: 1px solid #0081ff;
+	// 	border-radius: 5px;
+	// 	box-shadow: 0 5px 15px #0081ff26, 0 15px 40px #0081ff33;
+	// 	transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+	// 	&:hover {
+	// 		background-color: #45a0fc;
+	// 	}
+	// }
+
 	.btn-login {
+		background-image: linear-gradient(to right, #56ccf2 0%, #2f80ed 51%, #56ccf2 100%);
+	}
+	.btn-login {
+		text-transform: uppercase;
+		transition: 0.5s;
+		background-size: 200% auto;
+
+		box-shadow: 0 0 20px #eee;
+
 		display: flex;
 		width: 100%;
 		display: inline-flex;
@@ -480,14 +508,15 @@
 		height: 2.6667rem;
 		padding: 0 1.4667rem;
 		font-weight: 500;
-		background-color: #0081ff;
-		border: 1px solid #0081ff;
+
+		border-color: unset;
 		border-radius: 5px;
-		box-shadow: 0 5px 15px #0081ff26, 0 15px 40px #0081ff33;
-		transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-		&:hover {
-			background-color: #45a0fc;
-		}
+	}
+
+	.btn-login:hover {
+		background-position: right center; /* change the direction of the change here */
+		color: #fff;
+		text-decoration: none;
 	}
 }
 
