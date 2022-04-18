@@ -1,18 +1,8 @@
-@import '~antd/dist/antd.css';
+@import "antd/dist/antd.css";
+@import "/src/resources/scss/variables/variable";
+@import "/src/resources/scss/mixins/mixins";
+@import "/src/resources/scss/common/common";
+@import "/src/resources/scss/common/mixin";
+@import "/src/resources/scss/common/table";
 
-@import 'resources/scss/variables/variable';
-@import 'resources/scss/mixins/mixins';
-@import 'resources/scss/common/mixin';
-@import 'resources/scss/common/typography';
-@import 'resources/scss/common/common';
-@import 'resources/scss/common/layout';
-@import 'resources/scss/common/table';
-@import 'resources/scss/common/print';
-@import "resources/scss/common/quickedit";
-
-@import 'resources/scss/screens/access-denied';
-@import 'resources/scss/screens/authentication';
-@import 'resources/scss/screens/notfound';
-
-@import 'resources/scss/screens/antd-customize';
-
+@import "/src/resources/scss/screens/layout";

@@ -209,10 +209,3 @@
   background-image:         linear-gradient(to bottom, $from, $to); /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 
-/*//Color RGBA*/
-@mixin transparent-backgound($color: #000, $value:0.5){
-  $start: "rgb(";
-  $end: ")";
-  background: #{$start}red($color), green($color), blue($color)#{$end};
-  background: rgba($color, $value);
-}

@@ -1,13 +1,10 @@
 import React from "react"
 import "./App.scss"
-import AppRoutes from "./Routes"
+import Router from "./routes"
 
 function App() {
-	return (
-		<div className="main-body">
-			<AppRoutes />
-		</div>
-	)
+	return <Router />
 }
 
 export default App
+

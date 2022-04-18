@@ -3,8 +3,8 @@ import DefaultLayout from "../../Component/Layout/Default"
 
 type Props = {}
 
-const Home = (props: Props) => {
-	return <p>Home</p>
+const Product = (props: Props) => {
+	return <div>Product</div>
 }
 
-export default Home
+export default Product

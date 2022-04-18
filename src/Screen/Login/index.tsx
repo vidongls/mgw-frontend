@@ -2,10 +2,8 @@ import React, { useContext, useEffect } from "react"
 import { Button, Form, Input, Spin, Typography, Divider } from "antd"
 import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons"
 import { useSearchParams } from "react-router-dom"
-import appConfig from "../../Config/App"
-import localStore from "../../Util/localStore"
 import loginImg from "../../resources/images/auth-bg.jpg"
-import imgBackground from "../../resources/images/auth-bg.jpg"
+
 import logo from "../../resources/images/logo.svg"
 
 const { Title } = Typography
@@ -32,9 +30,9 @@ export const Login = () => {
 	return (
 		<div className="login">
 			<div className="login-wrapper">
-				<div className="login-bg">
+				{/* <div className="login-bg">
 					<img src={loginImg} alt="" />
-				</div>
+				</div> */}
 				<div className="login-left">
 					<h1>
 						Welcome to <span>MGW</span>

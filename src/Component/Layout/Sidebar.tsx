@@ -1,193 +1,99 @@
+import React, { useEffect, useState } from "react"
 import {
-	AppstoreOutlined,
+	UploadOutlined,
+	UserOutlined,
+	VideoCameraOutlined,
 	CloseOutlined,
-	DoubleLeftOutlined,
-	DoubleRightOutlined,
+	AppstoreOutlined,
 	DashboardOutlined,
 	ThunderboltOutlined,
 } from "@ant-design/icons"
-import {Image, Layout, Menu} from "antd"
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
-import React, {useEffect, useState} from "react"
-import {Link, useLocation} from "react-router-dom"
-import TriggerInImg from "../../resources/images/icon-trigger.png"
-import SecurityService from "../../Util/SecurityService"
-const { Sider } = Layout
-interface IMenuItem {
-	key: string
-	title: string
-	icon: any
-	url: string
-	permissions: Array<string>
-	children?: Array<IMenuItem>
-}
+import logo from "../../resources/images/logo.svg"
+import { Layout, Menu } from "antd"
+import { Link, useLocation } from "react-router-dom"
 
 interface Props {
 	collapsed: boolean
-	history: any
-	match: any
-	showSideBar: boolean
-	onShowSideBar: (val: boolean) => void
-	onChangeTitle: (val: string) => void
-	onCollapsed: (val: boolean) => void
+	setCollapsed: (val: boolean) => void
+	handleCloseSidebar: () => void
 }
 
-export const SideBar = (props: Props) => {
-	const [items] = useState<IMenuItem[]>([
-		{
-			key: "APP",
-			title: "Dashboard",
-			permissions: [],
-			icon: <DashboardOutlined />,
-			url: "/apps",
-		},
+const { Sider } = Layout
 
-		{
-			key: "ADMIN-APP",
-			title: "Table",
-			permissions: [],
-			icon: <AppstoreOutlined />,
-			url: "/admin/apps",
-		},
-
-		{
-			key: "BLACKLIST",
-			title: "Table",
-			permissions: [],
-			icon: <ThunderboltOutlined />,
-			url: "/admin/blacklists",
-		},
-	])
-
-	const [openKeys] = useState<Array<any>>([])
-	const [currentKey, setCurrentKey] = useState<Array<string>>(["DASHBOARD"])
+const Sidebar = ({ collapsed, setCollapsed, handleCloseSidebar }: Props) => {
+	const [openKeys, setOpenKeys] = useState<string[]>([""])
+	const { xs, sm } = useBreakpoint()
 	const location = useLocation()
-	const { xs } = useBreakpoint()
 
 	useEffect(() => {
-		setCurrentKey(["APP"])
-		props.onChangeTitle("Quản lí app")
+		switch (location.pathname) {
+			case "/":
+				console.log("test")
+				setOpenKeys([location.pathname])
+				break
 
-		if (location.pathname.startsWith('/apps')) {
-			setCurrentKey(["APP"])
-			props.onChangeTitle("Quản lí app")
+			default:
+				break
 		}
-		else if (location.pathname.startsWith('/admin/apps')) {
-			setCurrentKey(["ADMIN-APP"])
-			props.onChangeTitle("Quản lí app (Admin)")
-		}
-		else if (location.pathname.startsWith('/admin/blacklists')) {
-			setCurrentKey(["BLACKLIST"])
-			props.onChangeTitle("BLACKLIST")
-		}
-	}, [location, props])
+	}, [location])
 
-	const isShowItem = (item: IMenuItem) => {
-		if (!item.permissions.length) {
-			return true
-		}
-
-		for (let perm of item.permissions) {
-			if (SecurityService.can(perm)) {
-				return true
-			}
-		}
-
-		return false
+	const handleChangeKey = (e: any) => {
+		console.log(e.keyPath)
+		setOpenKeys(e.keyPath)
 	}
+    
+	const menuList = [
+		{
+			name: "Dashboard",
+			path: "/",
+		},
+		{
+			name: "Test",
+			path: "/test",
+		},
+	]
 
-	const { collapsed } = props
-
-	const renderMenuItem = (item: IMenuItem) => {
-		if (isShowItem(item)) {
-			if (item.children) {
-				return (
-					<Menu.SubMenu
-						key={item.key}
-						className={"sidebar-item-has-children"}
-						title={item.title}
-						icon={item.icon}
-					>
-						{item.children.map((childItem) => (
-							<Menu.Item
-								key={childItem.key}
-								className={`_sidebar_menu_${childItem.key.toLowerCase()} ${
-									!isShowItem(childItem) ? "d-none" : ""
-								}`}
-							>
-								{item.icon}
-								<span className="_link-menu-dashboard sidebar-item">
-									<span className="sidebar-item__url">
-										<Link className={"sidebar-item__url__a"} to={childItem.url}>
-											{childItem.title}
-										</Link>
-									</span>
-								</span>
-							</Menu.Item>
-						))}
-					</Menu.SubMenu>
-				)
-			} else {
-				return (
-					<Menu.Item
-						key={item.key}
-						className={`_sidebar_menu_${item.key.toLowerCase()}`}
-						onClick={() => props.onChangeTitle(item.title)}
-					>
-						{item.icon}
-						<span className="_link-menu-dashboard sidebar-item">
-							<span className="sidebar-item__url">
-								<Link className={"sidebar-item__url__a"} to={item.url}>
-									{item.title}
-								</Link>
-							</span>
-						</span>
-					</Menu.Item>
-				)
-			}
-		}
-	}
-
-	const handleCloseSideBar = () => {
-		props.onShowSideBar(false)
-		props.onCollapsed(true)
-	}
+	const childrenMenu = (
+		<>
+			{menuList.map((item) => (
+				<Menu.Item key={item.path} icon={<UserOutlined />}>
+					<Link to={item.path}>{item.name}</Link>
+				</Menu.Item>
+			))}
+		</>
+	)
 
 	return (
-		<>
-			<Sider
-				collapsible
-				collapsed={collapsed}
-				className={`sidebar ${props.showSideBar ? "showed" : ""} ${collapsed ? "width-72" : ""}`}
-				trigger={
-					!collapsed ? (
-						<Image
-							preview={false}
-							src={TriggerInImg}
-							onClick={() => {
-								props.onCollapsed(true)
-							}}
-						/>
-					) : null
-				}
-			>
-               
-				<div className={`sidebar__trigger-top ${xs ? "closable" : ""}`}>
-					{collapsed ? (
-						<DoubleRightOutlined onClick={() => props.onCollapsed(false)} />
-					) : (
-						<>
-							<DoubleLeftOutlined onClick={() => props.onCollapsed(true)} />
-							{xs && <CloseOutlined onClick={handleCloseSideBar} />}
-						</>
-					)}
+		<Sider
+			breakpoint="lg"
+			collapsedWidth={xs ? "0" : undefined}
+			// collapsible={!xs && true}
+			trigger={null}
+			collapsed={collapsed}
+			className={`sidebar ${xs && "sidebar-mobile"} ${xs ? (!collapsed ? "expand" : "") : "collapsed"}`}
+		>
+			{xs && (
+				<div className="flex justify-between menu-collapse items-center">
+					<div className="logo">
+						<img src={logo} alt="logo" /> MGW
+					</div>
+					<div className="flexitems-center" onClick={handleCloseSidebar}>
+						<CloseOutlined />
+					</div>
 				</div>
-				<Menu mode="inline" openKeys={openKeys} selectedKeys={currentKey}>
-					{items.map((item) => renderMenuItem(item))}
-				</Menu>
-			</Sider>
-		</>
+			)}
+			{sm && (
+				<div className="logo">
+					<img src={logo} alt="logo" />
+				</div>
+			)}
+
+			<Menu theme="light" mode="inline" selectedKeys={openKeys} onClick={handleChangeKey}>
+				{childrenMenu}
+			</Menu>
+		</Sider>
 	)
 }
 
-export default SideBar
+export default Sidebar
