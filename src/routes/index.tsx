@@ -11,7 +11,7 @@ type Props = {}
 const Router = (props: Props) => {
 	return (
 		<Routes>
-			<Route element={<RequireAuth />}>
+			<Route element={<RequireAuth  allowedRoles={['customer']}/>}>
 				<Route path="/" element={<Home />} />
 				<Route path={"/test"} element={<Product />} />
 			</Route>

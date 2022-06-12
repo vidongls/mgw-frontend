@@ -13,8 +13,9 @@ class SecurityService {
     static isLogged = () => {
         const loginSession = localStore.getJson('loginSession');
         const accessToken = lodash.get(loginSession, 'accessToken');
-        const expireAt = lodash.get(loginSession, 'expireAt');
-        return accessToken && moment(expireAt).diff(moment.now());
+        // const expireAt = lodash.get(loginSession, 'expireAt');
+        // && moment(expireAt).diff(moment.now());
+        return accessToken 
     };
 
     static getUser = () => {
