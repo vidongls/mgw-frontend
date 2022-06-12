@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import Home from "../Screen/Home"
 import { Login } from "../Screen/Login"
 import Product from "../Screen/Product"
+import { Register } from "../Screen/Register"
 import RequireAuth from "../Util/RequireAuth"
 
 type Props = {}
@@ -12,9 +13,10 @@ const Router = (props: Props) => {
 		<Routes>
 			<Route element={<RequireAuth />}>
 				<Route path="/" element={<Home />} />
-				<Route path={"/login"} element={<Login />} />
 				<Route path={"/test"} element={<Product />} />
 			</Route>
+			<Route path={"/login"} element={<Login />} />
+			<Route path={"/register"} element={<Register />} />
 		</Routes>
 	)
 }

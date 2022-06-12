@@ -1,21 +1,16 @@
-import React, { useContext, useEffect, useState } from "react"
-import { Button, Form, Input, Spin, Typography, Divider, notification } from "antd"
-import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons"
+import React, { useState } from "react"
+import { Button, Form, Input, Divider, notification } from "antd"
+import { MailOutlined, LockOutlined } from "@ant-design/icons"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
-import loginImg from "../../resources/images/auth-bg.jpg"
 
 import logo from "../../resources/images/logo.svg"
-import useAuth from "../../hooks/useAuth"
 import UserApi from "../../Api/UserApi"
 
-const { Title } = Typography
-
-export const Login = () => {
+export const Register = () => {
 	const [searchParams] = useSearchParams()
-	const [loading, setLoading] = useState(false)
-    const { setAuth }: any = useAuth()
-    let navigate = useNavigate()
+	let navigate = useNavigate()
 
+	const [loading, setLoading] = useState(false)
 	// useEffect(() => {
 	//     localStore.setItem('redirectBackUrl', searchParams.get('redirectBackUrl') || '/');
 
@@ -27,16 +22,17 @@ export const Login = () => {
 	// })
 
 	const onFinish = (values: any) => {
-		console.log("Success:", values)
-        UserApi.login(values)
+		setLoading(true)
+        
+		UserApi.register(values)
 			.then((res) => {
                 console.log("🚀 ~ res", res)
-                navigate('/')
-				notification.success({ message: "Đăng nhập thành công!" })
+                navigate('/login')
+				notification.success({ message: "Đăng ký thành công!" })
 			})
 			.catch((err) => {
                 console.log("🚀 ~ err", err)
-				notification.error({ message: "Đăng nhập thất bại!" })
+				notification.error({ message: "Đăng ký thất bại!" })
 			})
 			.finally(() => {
 				setLoading(false)
@@ -77,23 +73,41 @@ export const Login = () => {
 								</div>
 							</div>
 							<div className="login-content">
-								<Form onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
-									<Form.Item name="email" rules={[{ required: true, message: "Please input your mail!" }]}>
-										<Input size="large" placeholder="Email" prefix={<MailOutlined />} className="login-content__input" />
+								<Form onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off" layout="vertical">
+									<Form.Item
+										label="FirstName"
+										name="firstName"
+										rules={[{ required: true, message: "Please input your FirstName!" }]}
+									>
+										<Input size="large" placeholder="FirstName" className="login-content__input" />
+									</Form.Item>
+									<Form.Item
+										label="LastName"
+										name="lastName"
+										rules={[{ required: true, message: "Please input your LastName!" }]}
+									>
+										<Input size="large" placeholder="LastName" className="login-content__input" />
+									</Form.Item>
+									<Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your mail!" }]}>
+										<Input size="large" placeholder="Email" className="login-content__input" />
 									</Form.Item>
 
-									<Form.Item name="password" rules={[{ required: true, message: "Please input your password!" }]} >
-										<Input.Password size="large" placeholder="Password" prefix={<LockOutlined />} />
+									<Form.Item
+										label="Password"
+										name="password"
+										rules={[{ required: true, message: "Please input your password!" }]}
+									>
+										<Input.Password size="large" placeholder="Password" />
 									</Form.Item>
 
 									<Form.Item>
 										<Button type="primary" htmlType="submit" className="btn-login" loading={loading}>
-											Login
+											Register
 										</Button>
 									</Form.Item>
 								</Form>
 							</div>
-                            <Link to={'/register'}>Register</Link>
+                            <Link to={'/login'}>Login</Link>
 							<Divider>MGW</Divider>
 						</div>
 					</div>
