@@ -21,9 +21,7 @@ jobs:
 #       - name: CI
 #         run: npm ci
       - name: Clean cache
-        run: | 
-            npm cache clean
-            rm -rf node_modules
+        run:  npm run clean
       - name: Install Dependencies
         run: npm install
      
