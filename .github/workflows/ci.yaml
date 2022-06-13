@@ -18,15 +18,17 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: CI
-        run: npm ci
-      - name: Build
-        run: |
-          npm run build
- 
+#       - name: CI
+#         run: npm ci
+      - name: Clean cache
+        run: | 
+            npm cache clean
+            rm -rf node_modules
+      - name: Install Dependencies
+        run: npm install
+     
       - name: Run Tests Locally
-        run: npm run test
- 
+        run: npm run test   
       - name: Deploy to Staging
         id: deploy-vercel-staging
         uses: amondnet/vercel-action@v20
