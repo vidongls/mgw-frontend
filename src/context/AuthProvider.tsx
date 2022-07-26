@@ -10,8 +10,8 @@ export const AuthProvider = (props: any) => {
 		const Auth = () => {
 			const auth = SecurityService.isLogged()
 			if (auth) {
-				const user = SecurityService.getUser()
-				setAuth({ user: user, accessToken: auth, role: get(user, "roles") })
+				// const user = SecurityService.getUser()
+				// setAuth({ user: user, accessToken: auth, role: get(user, "roles") })
 			}
 		}
         Auth()

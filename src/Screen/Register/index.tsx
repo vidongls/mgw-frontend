@@ -1,16 +1,22 @@
-import React, { useState } from "react"
-import { Button, Form, Input, Divider, notification } from "antd"
-import { MailOutlined, LockOutlined } from "@ant-design/icons"
-import { Link, useNavigate, useSearchParams } from "react-router-dom"
+import React, { useState } from "react";
+import { Button, Form, Input, Divider, notification } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 
-import logo from "../../resources/images/logo.svg"
-import UserApi from "../../Api/UserApi"
+import logo from "../../resources/images/logo.svg";
+import UserApi from "../../Api/UserApi";
+
+interface IUser {
+	email: string;
+	firstName: string;
+	lastName: string;
+	password: string;
+	re_password?: string;
+}
 
 export const Register = () => {
-	const [searchParams] = useSearchParams()
-	let navigate = useNavigate()
+	let navigate = useNavigate();
 
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
 	// useEffect(() => {
 	//     localStore.setItem('redirectBackUrl', searchParams.get('redirectBackUrl') || '/');
 
@@ -21,27 +27,25 @@ export const Register = () => {
 	//     }, 1000);
 	// })
 
-	const onFinish = (values: any) => {
-		setLoading(true)
-        
+	const onFinish = (values: IUser) => {
+		setLoading(true);
+        delete values.re_password
 		UserApi.register(values)
 			.then((res) => {
-                console.log("🚀 ~ res", res)
-                navigate('/login')
-				notification.success({ message: "Đăng ký thành công!" })
+				navigate("/login");
+				notification.success({ message: "Đăng ký thành công!" });
 			})
 			.catch((err) => {
-                console.log("🚀 ~ err", err)
-				notification.error({ message: "Đăng ký thất bại!" })
+				notification.error({ message: "Đăng ký thất bại!" });
 			})
 			.finally(() => {
-				setLoading(false)
-			})
-	}
+				setLoading(false);
+			});
+	};
 
 	const onFinishFailed = (errorInfo: any) => {
-		console.log("Failed:", errorInfo)
-	}
+		console.log("Failed:", errorInfo);
+	};
 
 	return (
 		<div className="login">
@@ -88,16 +92,55 @@ export const Register = () => {
 									>
 										<Input size="large" placeholder="LastName" className="login-content__input" />
 									</Form.Item>
-									<Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your mail!" }]}>
+									<Form.Item
+										label="Email"
+										name="email"
+										rules={[{ required: true, message: "Please input your mail!" }]}
+									>
 										<Input size="large" placeholder="Email" className="login-content__input" />
 									</Form.Item>
 
 									<Form.Item
 										label="Password"
 										name="password"
-										rules={[{ required: true, message: "Please input your password!" }]}
+										rules={[
+											// {
+											// 	min: 6,
+											// 	message: "Tu 6 ky tu",
+											// },
+											{
+												required: true,
+												message: "Please input your password!",
+											},
+											{
+												pattern: new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"),
+												message: `Sai cmn dinh dang`,
+											},
+										]}
 									>
 										<Input.Password size="large" placeholder="Password" />
+									</Form.Item>
+
+									<Form.Item
+										label="Retype password"
+										name="re_password"
+										dependencies={["password"]}
+										rules={[
+											{
+												required: true,
+												message: "Required",
+											},
+											({ getFieldValue }) => ({
+												validator(_, value) {
+													if (!value || getFieldValue("password") === value) {
+														return Promise.resolve();
+													}
+													return Promise.reject(new Error("Pass khong trung"));
+												},
+											}),
+										]}
+									>
+										<Input.Password placeholder={"Nhap lai pass"} />
 									</Form.Item>
 
 									<Form.Item>
@@ -107,12 +150,12 @@ export const Register = () => {
 									</Form.Item>
 								</Form>
 							</div>
-                            <Link to={'/login'}>Login</Link>
+							<Link to={"/login"}>Login</Link>
 							<Divider>MGW</Divider>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};

@@ -10,12 +10,11 @@ interface Props {}
 const RequireAuth = ({ allowedRoles, children }: any) => {
 	const { auth, setAuth }: any = useAuth()
 	const location = useLocation()
-	//
 
 	if (!SecurityService.isLogged()) {
 		return <Navigate to={"/login"} />
 	}
-
+console.log(auth);
 	let component = (
 		<DefaultLayout>
 			<Outlet />

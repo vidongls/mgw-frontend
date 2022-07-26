@@ -29,7 +29,6 @@ const Sidebar = ({ collapsed, setCollapsed, handleCloseSidebar }: Props) => {
 	useEffect(() => {
 		switch (location.pathname) {
 			case "/":
-				console.log("test")
 				setOpenKeys([location.pathname])
 				break
 

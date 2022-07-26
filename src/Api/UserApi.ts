@@ -9,4 +9,8 @@ export default class UserApi {
     static login = (data: any) => {
 		return apiClient.post("/login", data)
 	}
+
+    static logout = (data: any) => {
+		return apiClient.post("/logout", data)
+	}
 }
