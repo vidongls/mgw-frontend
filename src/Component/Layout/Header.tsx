@@ -20,7 +20,6 @@ const Header: React.FC<Props> = ({ handleOpenSidebar, handleCloseSidebar, collap
 	const handleLogout = (): void => {
 		UserApi.logout({ platform: "web", device: "pro" })
 			.then((res) => {
-                console.log('res',res);
                 localStore.removeItem("loginSession")
 				localStore.removeItem("loggedUser")
                 navigate("/")
