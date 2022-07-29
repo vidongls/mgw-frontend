@@ -64,7 +64,7 @@ export const Register = () => {
 					</p>
 				</div>
 
-				<div className="login-right">
+				<div className="login-right register">
 					<div className="login-panel">
 						<div className="login-panel__wrapper">
 							<div className="login-panel__content">

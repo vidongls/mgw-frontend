@@ -9,7 +9,6 @@
 	[aria-label] {
 		font-size: 18px;
 	}
-	
 }
 
 .sidebar {
@@ -61,9 +60,9 @@
 					border-radius: 0 5px 5px 0;
 					background-color: #0081ff;
 				}
-                &::after{
-                    display: none;
-                }
+				&::after {
+					display: none;
+				}
 			}
 		}
 	}
@@ -117,7 +116,7 @@
 
 .login {
 	width: 100%;
-	min-height: 100vh;
+	height: 100vh;
 	overflow: hidden;
 	flex-grow: 1;
 	display: flex;
@@ -186,6 +185,13 @@
 		display: flex;
 		flex-direction: column;
 	}
+
+	& .register {
+		.ant-row.ant-form-item {
+			margin-bottom: 12px !important;
+		}
+	}
+
 	&-panel {
 		flex-grow: 1;
 		display: flex;
@@ -239,7 +245,7 @@
 
 		&__input {
 			margin-bottom: 8px;
-            border-radius: 6px;
+			border-radius: 6px;
 		}
 	}
 	// .btn-login {
