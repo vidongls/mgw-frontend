@@ -1,22 +1,22 @@
-import React, { useContext, useEffect, useState } from "react"
-import { Button, Form, Input, Spin, Typography, Divider, notification } from "antd"
-import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons"
-import { Link, useNavigate, useSearchParams } from "react-router-dom"
-import loginImg from "../../resources/images/auth-bg.jpg"
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Form, Input, Spin, Typography, Divider, notification } from "antd";
+import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import loginImg from "../../resources/images/auth-bg.jpg";
 
-import logo from "../../resources/images/logo.svg"
-import useAuth from "../../hooks/useAuth"
-import UserApi from "../../Api/UserApi"
-import { get } from "lodash"
-import localStore from "../../Util/localStore"
+import logo from "../../resources/images/logo.svg";
+import useAuth from "../../hooks/useAuth";
+import UserApi from "../../Api/UserApi";
+import { get } from "lodash";
+import localStore from "../../Util/localStore";
 
-const { Title } = Typography
+const { Title } = Typography;
 
 export const Login = () => {
-	const [searchParams] = useSearchParams()
-	const [loading, setLoading] = useState(false)
-	const { setAuth }: any = useAuth()
-	let navigate = useNavigate()
+	const [searchParams] = useSearchParams();
+	const [loading, setLoading] = useState(false);
+	const { setAuth }: any = useAuth();
+	let navigate = useNavigate();
 
 	// useEffect(() => {
 	//     localStore.setItem('redirectBackUrl', searchParams.get('redirectBackUrl') || '/');
@@ -28,33 +28,36 @@ export const Login = () => {
 	//     }, 1000);
 	// })
 
-	localStore.removeItem("loginSession")
+	// localStore.removeItem("loginSession")
 
 	const onFinish = (values: any) => {
 		UserApi.login({ ...values, platform: "web", device: "pro" })
 			.then((res) => {
-				const data = res.data
+				const data = res.data;
+                console.log("🚀 ~ data", data)
 
-				localStore.setJson("loginSession", {
+				localStore.setItem("loginSession", get(data, "data.accessToken"));
+
+				localStore.setItem("loggedUser", get(data, "data.user"));
+
+				setAuth({
+					user: get(data, "data.user"),
 					accessToken: get(data, "data.accessToken"),
-				})
+					role: get(data, "data.user.roles"),
+				});
+				navigate("/");
 
-				localStore.setJson("loggedUser", get(data, "data.user"))
-
-				setAuth({ user: get(data, "data.user"), accessToken: get(data, "data.accessToken"), role: get(data, "data.user.roles") })
-				navigate("/")
-
-				notification.success({ message: "Đăng nhập thành công!" })
+				notification.success({ message: "Đăng nhập thành công!" });
 			})
 			.catch((err) => {
-				localStore.removeItem("loginSession")
-				localStore.removeItem("loggedUser")
-				notification.error({ message: "Đăng nhập thất bại!" })
+				localStore.removeItem("loginSession");
+				localStore.removeItem("loggedUser");
+				notification.error({ message: "Đăng nhập thất bại!" });
 			})
 			.finally(() => {
-				setLoading(false)
-			})
-	}
+				setLoading(false);
+			});
+	};
 
 	return (
 		<>
@@ -89,7 +92,12 @@ export const Login = () => {
 								<div className="login-content">
 									<Form onFinish={onFinish} autoComplete="off">
 										<Form.Item name="email" rules={[{ required: true, message: "Please input your mail!" }]}>
-											<Input size="large" placeholder="Email" prefix={<MailOutlined />} className="login-content__input" />
+											<Input
+												size="large"
+												placeholder="Email"
+												prefix={<MailOutlined />}
+												className="login-content__input"
+											/>
 										</Form.Item>
 
 										<Form.Item name="password" rules={[{ required: true, message: "Please input your password!" }]}>
@@ -111,5 +119,5 @@ export const Login = () => {
 				</div>
 			</div>
 		</>
-	)
-}
+	);
+};
