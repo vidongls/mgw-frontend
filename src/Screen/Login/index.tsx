@@ -31,11 +31,11 @@ export const Login = () => {
 	// localStore.removeItem("loginSession")
 
 	const onFinish = (values: any) => {
-		UserApi.login({ ...values, platform: "web", device: "pro" })
+        setLoading(true)
+		UserApi.login({ ...values })
 			.then((res) => {
 				const data = res.data;
-                console.log("🚀 ~ data", data)
-
+         
 				localStore.setItem("loginSession", get(data, "data.accessToken"));
 
 				localStore.setItem("loggedUser", get(data, "data.user"));

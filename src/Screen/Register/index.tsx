@@ -7,8 +7,7 @@ import UserApi from "../../Api/UserApi";
 
 interface IUser {
 	email: string;
-	firstName: string;
-	lastName: string;
+	fullName: string;
 	password: string;
 	re_password?: string;
 }
@@ -79,23 +78,23 @@ export const Register = () => {
 							<div className="login-content">
 								<Form onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off" layout="vertical">
 									<Form.Item
-										label="FirstName"
-										name="firstName"
-										rules={[{ required: true, message: "Please input your FirstName!" }]}
+										label="fullName"
+										name="fullName"
+										rules={[{ required: true, message: "Please input your fullName!" }]}
 									>
-										<Input size="large" placeholder="FirstName" className="login-content__input" />
+										<Input size="large" placeholder="fullName" className="login-content__input" />
 									</Form.Item>
-									<Form.Item
-										label="LastName"
-										name="lastName"
-										rules={[{ required: true, message: "Please input your LastName!" }]}
-									>
-										<Input size="large" placeholder="LastName" className="login-content__input" />
-									</Form.Item>
+
 									<Form.Item
 										label="Email"
 										name="email"
-										rules={[{ required: true, message: "Please input your mail!" }]}
+										rules={[
+											{ required: true, message: "Please input your mail!" },
+											{
+												type: "email",
+												message: "The input is not valid E-mail!",
+											},
+										]}
 									>
 										<Input size="large" placeholder="Email" className="login-content__input" />
 									</Form.Item>
@@ -104,10 +103,6 @@ export const Register = () => {
 										label="Password"
 										name="password"
 										rules={[
-											// {
-											// 	min: 6,
-											// 	message: "Tu 6 ky tu",
-											// },
 											{
 												required: true,
 												message: "Please input your password!",
@@ -123,8 +118,8 @@ export const Register = () => {
 
 									<Form.Item
 										label="Retype password"
-										name="re_password"
 										dependencies={["password"]}
+                                        name='re_password'
 										rules={[
 											{
 												required: true,

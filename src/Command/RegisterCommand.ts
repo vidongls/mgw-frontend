@@ -1,6 +1,5 @@
 export interface RegisterCommand {
-	firstName: string
-	lastName: string
+	fullName: string
 	email: string
 	password: string
 }

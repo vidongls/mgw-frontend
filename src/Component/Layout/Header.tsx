@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({ handleOpenSidebar, handleCloseSidebar, collap
 	const { auth }: any = useAuth();
     let navigate = useNavigate()
 	const handleLogout = (): void => {
-		UserApi.logout({ platform: "web", device: "pro" })
+		UserApi.logout({})
 			.then((res) => {
                 localStore.removeItem("loginSession")
 				localStore.removeItem("loggedUser")
